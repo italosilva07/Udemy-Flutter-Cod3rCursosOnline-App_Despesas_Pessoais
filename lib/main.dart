@@ -1,5 +1,10 @@
-import 'package:fdispensa/components/transaction_user.dart';
+import 'package:fdispensa/components/transaction_form.dart';
+
 import 'package:flutter/material.dart';
+import 'dart:math';
+import 'components/transaction_form.dart';
+import 'components/transaction_list.dart';
+import 'models/transaction.dart';
 
 void main() => runApp(ExpensesApp());
 
@@ -12,13 +17,60 @@ class ExpensesApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final _transactions = [
+    Transaction(
+      id: "t1",
+      title: "Tênis novo",
+      value: 300.00,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: "t2",
+      title: "Conta de luz",
+      value: 211.30,
+      date: DateTime.now(),
+    ),
+  ];
+
+  _addtransaction(String title, double value) {
+    final newTransacyion = Transaction(
+      id: Random().nextDouble().toString(),
+      title: title,
+      value: value,
+      date: DateTime.now(),
+    );
+
+    setState(() {
+      _transactions.add(newTransacyion);
+    });
+  }
+
+  _openTransactionFormModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) {
+        return TransactionForm(_addtransaction);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Despesas Pessoais"),
-        actions: <Widget>[IconButton(icon: Icon(Icons.add), onPressed: () {})],
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () => _openTransactionFormModal(context),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -31,13 +83,17 @@ class MyHomePage extends StatelessWidget {
                 elevation: 5,
               ),
             ),
-            TransactionUser(),
+            Column(
+              children: <Widget>[
+                TransctionList(_transactions),
+              ],
+            )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () => _openTransactionFormModal(context),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
