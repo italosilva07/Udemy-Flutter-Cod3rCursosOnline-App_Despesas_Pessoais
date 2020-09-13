@@ -1,3 +1,4 @@
+import 'package:fdispensa/components/chart.dart';
 import 'package:fdispensa/components/transaction_form.dart';
 
 import 'package:flutter/material.dart';
@@ -37,6 +38,16 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _transactions = [];
+
+  List<Transaction> get _recentTransactions {
+    return _transactions.where((element) {
+      return element.date.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
 
   _addtransaction(String title, double value) {
     final newTransacyion = Transaction(
@@ -81,11 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
-              child: Card(
-                color: Colors.blue,
-                child: Text("gráfico"),
-                elevation: 5,
-              ),
+              child: Chart(_recentTransactions),
             ),
             Column(
               children: <Widget>[
