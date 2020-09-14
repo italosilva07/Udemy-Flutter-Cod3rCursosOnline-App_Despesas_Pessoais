@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:io';
+import 'package:flutter/material.dart';
 
 class AdaptativeButton extends StatelessWidget {
   final String label;
@@ -18,11 +18,13 @@ class AdaptativeButton extends StatelessWidget {
             child: Text(label),
             onPressed: onPressed,
             color: Theme.of(context).primaryColor,
-            padding: EdgeInsets.symmetric(horizontal: , vertical: ,),
+            padding: EdgeInsets.symmetric(
+              horizontal: 20,
+            ),
           )
         : RaisedButton(
-          color: Theme.of(context).primaryColor,
-          textColor: Theme.of(context).textTheme.button.color,
+            color: Theme.of(context).primaryColor,
+            textColor: Theme.of(context).textTheme.button.color,
             child: Text(label),
             onPressed: onPressed,
           );
