@@ -99,10 +99,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
     bool isLandscape = mediaQuery.orientation == Orientation.landscape;
 
+    final iconList = Platform.isIOS ? CupertinoIcons.refresh : Icons.list;
+    final chartList = Platform.isIOS ? CupertinoIcons.refresh : Icons.pie_chart;
+
     final actions = <Widget>[
       if (isLandscape)
         _getIconButton(
-          _showChart ? Icons.list : Icons.pie_chart,
+          _showChart ? iconList : chartList,
           () {
             setState(() {
               _showChart = !_showChart;
@@ -134,11 +137,12 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar.preferredSize.height -
         mediaQuery.padding.top;
 
-    final bodyPage = SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          /*
+    final bodyPage = SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            /*
             if (isLandscape)
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -155,20 +159,21 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
               */
-          if (_showChart || !isLandscape)
-            Container(
-              height: availableHeight * (isLandscape ? 0.65 : 0.3),
-              child: Chart(_recentTransactions),
-            ),
-          if (!_showChart || !isLandscape)
-            Container(
-              height: availableHeight * (isLandscape ? 1 : 0.7),
-              child: TransctionList(
-                _transactions,
-                _deleteTransaction,
+            if (_showChart || !isLandscape)
+              Container(
+                height: availableHeight * (isLandscape ? 0.65 : 0.3),
+                child: Chart(_recentTransactions),
               ),
-            ),
-        ],
+            if (!_showChart || !isLandscape)
+              Container(
+                height: availableHeight * (isLandscape ? 1 : 0.7),
+                child: TransctionList(
+                  _transactions,
+                  _deleteTransaction,
+                ),
+              ),
+          ],
+        ),
       ),
     );
 
