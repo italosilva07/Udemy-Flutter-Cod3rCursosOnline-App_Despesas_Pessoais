@@ -1,6 +1,8 @@
-# fdispensa
+# Despesas Pessoais
 
-A new Flutter application.
+É um projeto ministrado pela Escola de Cursos Online de Tecnologia: Cod3r Cursos Online através do professor e Arquiteto de Software: Leonardo Moura Leitao. E  lecionou como desenvolver  o app e transmitiu conhecimentos sobre o Framework Flutter desenvolvido pela Google. 
+
+
 
 ## Getting Started
 
