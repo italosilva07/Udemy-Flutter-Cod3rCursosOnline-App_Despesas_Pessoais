@@ -1,12 +1,12 @@
-import 'package:fdispensa/components/chart.dart';
-import 'package:fdispensa/components/transaction_form.dart';
+import 'components/chart.dart';
+import 'components/transaction_form.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 
 import 'dart:math';
 import 'dart:io';
-import 'components/transaction_form.dart';
+
 import 'components/transaction_list.dart';
 import 'models/transaction.dart';
 
@@ -142,23 +142,6 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            /*
-            if (isLandscape)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text('Exibir Gráfico'),
-                  Switch(
-                    value: _showChart,
-                    onChanged: (value) {
-                      setState(() {
-                        _showChart = value;
-                      });
-                    },
-                  ),
-                ],
-              ),
-              */
             if (_showChart || !isLandscape)
               Container(
                 height: availableHeight * (isLandscape ? 0.65 : 0.3),

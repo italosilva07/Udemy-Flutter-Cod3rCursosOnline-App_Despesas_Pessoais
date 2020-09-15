@@ -7,7 +7,7 @@ class AdaptativeTextField extends StatelessWidget {
   final String label;
   final TextEditingController controller;
   final TextInputType keyboardType;
-  Function(String) onSubmitted;
+  final Function(String) onSubmitted;
 
   AdaptativeTextField({
     this.controller,
